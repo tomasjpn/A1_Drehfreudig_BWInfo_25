@@ -1,22 +1,40 @@
 import { promises as fs } from "fs";
 import chalk from "chalk";
 
-async function loadTestFiles(folderPath: string) {
+async function loadTestFiles(
+  folderPath: string
+): Promise<string[] | undefined> {
   try {
+    console.log(
+      `Versuche die Dateien im Ordner: ${chalk.italic.underline.bold.cyan(
+        folderPath
+      )},  zu laden ...`
+    );
     const files = await fs.readdir(folderPath);
-    console.log("Dateien wurden erfolgreich geladen:", files);
+    console.log("... Dateien wurden erfolgreich geladen:", files);
+    return files;
   } catch (error) {
-    console.error("Fehler beim Laden der Dateien:", error);
+    console.error("... Fehler beim Laden der Dateien:", error);
+    return undefined;
   }
 }
 
 async function readTestFiles(filePath: string) {
   try {
-    const fileContent = await fs.readFile(`test/${filePath}`, "utf-8");
+    console.log(
+      `Versuche den Inhalt der Testdatei: ${chalk.italic.underline.bold.cyan(
+        filePath
+      )}, zu lesen ...`
+    );
+    const fileContent = await fs.readFile(
+      `../A1_Drehfreudig_Test_Daten/${filePath}`,
+      "utf-8"
+    );
+    console.log(chalk.green("... Inhalt der Testdatei erfolgreich geladen"));
     console.log("Inhalt der Testdatei:", fileContent);
     return fileContent.trim();
   } catch (error) {
-    console.error("Fehler beim Lesen der Testdatei:", error);
+    console.error("... Fehler beim Lesen der Testdatei:", error);
   }
 }
 
@@ -36,6 +54,18 @@ async function main() {
     console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!"));
   } catch (error) {
     console.error("... Zugriff auf den Ordner fehlgeschlagen:", error);
+  }
+
+  const testFiles = await loadTestFiles(testFolderPath);
+  if (testFiles && testFiles.length === 0) {
+    console.log(chalk.red("... Ordner beinhaltet keine Testdateien."));
+    return;
+  }
+
+  if (testFiles) {
+    for (const testFile of testFiles) {
+      const fileContent = await readTestFiles(testFile);
+    }
   }
 }
 
