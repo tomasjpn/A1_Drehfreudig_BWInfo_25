@@ -70,13 +70,17 @@ export async function fileManager() {
     const userResponse = await prompts({
       type: "select",
       name: "testFile",
-      message: "Welche Test Datei möchtest du ausführen?",
+      message: "Welche Testdatei möchtest du ausführen?",
       choices: testFiles.map((testFile) => ({
         title: testFile,
         value: testFile,
       })),
       initial: 0,
     });
+    console.log(
+      "Folgende Testdatei wurde ausgewählt:",
+      chalk.italic.underline.bold.cyan(userResponse.testFile)
+    );
 
     if (!userResponse.testFile) {
       console.log(
@@ -86,3 +90,5 @@ export async function fileManager() {
     }
   }
 }
+
+/* fileManager(); */
