@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import chalk from "chalk";
 
 async function loadTestFiles(folderPath: string) {
   try {
@@ -19,4 +20,23 @@ async function readTestFiles(filePath: string) {
   }
 }
 
-loadTestFiles("../A1_Drehfreudig_Test_Daten");
+/* loadTestFiles("../A1_Drehfreudig_Test_Daten"); */
+/* readTestFiles("../../A1_Drehfreudig_Test_Daten/drehfreudig01.txt"); */
+
+async function main() {
+  const testFolderPath = "../A1_Drehfreudig_Test_Daten";
+
+  try {
+    console.log(
+      `Versuche, auf den Ordner mit den Testdateien: ${chalk.italic.underline.cyan(
+        testFolderPath
+      )} zuzugreifen ...`
+    );
+    await fs.access(testFolderPath);
+    console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!"));
+  } catch (error) {
+    console.error("... Zugriff auf den Ordner fehlgeschlagen:", error);
+  }
+}
+
+main();
