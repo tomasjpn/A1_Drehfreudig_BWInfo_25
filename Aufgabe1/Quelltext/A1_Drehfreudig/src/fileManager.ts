@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import chalk from "chalk";
+import prompts from "prompts";
 
 async function loadTestFiles(
   folderPath: string
@@ -65,6 +66,23 @@ export async function fileManager() {
   if (testFiles) {
     for (const testFile of testFiles) {
       const fileContent = await readTestFiles(testFile);
+    }
+    const userResponse = await prompts({
+      type: "select",
+      name: "testFile",
+      message: "Welche Test Datei möchtest du ausführen?",
+      choices: testFiles.map((testFile) => ({
+        title: testFile,
+        value: testFile,
+      })),
+      initial: 0,
+    });
+
+    if (!userResponse.testFile) {
+      console.log(
+        chalk.red("Keine Testdatei ausgewählt. Vorgang abgebrochen.")
+      );
+      return;
     }
   }
 }
