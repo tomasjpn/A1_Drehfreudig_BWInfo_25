@@ -88,6 +88,13 @@ export async function fileManager() {
       );
       return;
     }
+
+    const selectedFilePath = `${testFolderPath}/${userResponse.testFile}`;
+    console.log(
+      "Dateipfad der ausgewählten Testdatei:",
+      chalk.italic.underline.bold.cyan(selectedFilePath)
+    );
+    return selectedFilePath;
   }
 }
 
