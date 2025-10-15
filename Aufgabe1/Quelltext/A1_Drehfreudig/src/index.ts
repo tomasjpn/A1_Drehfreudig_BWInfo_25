@@ -1,4 +1,3 @@
-function greet(name: string) {
-  console.log(`Hello, ${name}!`);
-}
-greet("World");
+import { fileManager } from "./fileManager.js";
+
+fileManager();

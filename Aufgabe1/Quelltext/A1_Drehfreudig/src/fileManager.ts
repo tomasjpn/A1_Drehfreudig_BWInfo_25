@@ -41,7 +41,7 @@ async function readTestFiles(filePath: string) {
 /* loadTestFiles("../A1_Drehfreudig_Test_Daten"); */
 /* readTestFiles("../../A1_Drehfreudig_Test_Daten/drehfreudig01.txt"); */
 
-async function main() {
+export async function fileManager() {
   const testFolderPath = "../A1_Drehfreudig_Test_Daten";
 
   try {
@@ -68,5 +68,3 @@ async function main() {
     }
   }
 }
-
-main();
