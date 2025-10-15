@@ -30,8 +30,8 @@ async function readTestFiles(filePath: string) {
       `../A1_Drehfreudig_Test_Daten/${filePath}`,
       "utf-8"
     );
-    console.log(chalk.green("... Inhalt der Testdatei erfolgreich geladen"));
-    console.log("Inhalt der Testdatei:", fileContent);
+    console.log("... Inhalt der Testdatei erfolgreich geladen");
+    console.log("Inhalt der Testdatei:", chalk.green(fileContent));
     return fileContent.trim();
   } catch (error) {
     console.error("... Fehler beim Lesen der Testdatei:", error);
