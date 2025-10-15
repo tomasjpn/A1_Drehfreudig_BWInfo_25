@@ -28,9 +28,9 @@ async function main() {
 
   try {
     console.log(
-      `Versuche, auf den Ordner mit den Testdateien: ${chalk.italic.underline.cyan(
+      `Versuche, auf den Ordner mit den Testdateien: { ${chalk.italic.underline.bold.cyan(
         testFolderPath
-      )} zuzugreifen ...`
+      )} }  zuzugreifen ...`
     );
     await fs.access(testFolderPath);
     console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!"));
