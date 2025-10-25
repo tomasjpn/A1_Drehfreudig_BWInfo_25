@@ -94,7 +94,13 @@ export async function fileManager() {
       "Dateipfad der ausgewählten Testdatei:",
       chalk.italic.underline.bold.cyan(selectedFilePath)
     );
-    return selectedFilePath;
+
+    const fileContent = await readTestFiles(userResponse.testFile);
+    if (!fileContent) {
+      console.log(chalk.red("Kein Inhalt in der Datei gefunden."));
+      return;
+    }
+    return fileContent;
   }
 }
 
