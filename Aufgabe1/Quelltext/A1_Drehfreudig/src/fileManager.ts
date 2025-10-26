@@ -1,10 +1,12 @@
 import { promises as fs } from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
+import { logger } from "./logger.js";
 
 async function loadTestFiles(
   folderPath: string
 ): Promise<string[] | undefined> {
+  logger.separator();
   try {
     console.log(
       `Versuche die Dateien im Ordner: ${chalk.italic.underline.bold.cyan(
@@ -21,6 +23,7 @@ async function loadTestFiles(
 }
 
 async function readTestFiles(filePath: string) {
+  logger.separator();
   try {
     console.log(
       `Versuche den Inhalt der Testdatei: ${chalk.italic.underline.bold.cyan(
@@ -39,12 +42,11 @@ async function readTestFiles(filePath: string) {
   }
 }
 
-/* loadTestFiles("../A1_Drehfreudig_Test_Daten"); */
-/* readTestFiles("../../A1_Drehfreudig_Test_Daten/drehfreudig01.txt"); */
+//--------------------------------------------------------------------------------//
 
 export async function fileManager() {
   const testFolderPath = "../A1_Drehfreudig_Test_Daten";
-
+  logger.separator();
   try {
     console.log(
       `Versuche, auf den Ordner mit den Testdateien: { ${chalk.italic.underline.bold.cyan(
@@ -67,6 +69,7 @@ export async function fileManager() {
     for (const testFile of testFiles) {
       const fileContent = await readTestFiles(testFile);
     }
+    logger.separator();
     const userResponse = await prompts({
       type: "select",
       name: "testFile",
@@ -100,6 +103,7 @@ export async function fileManager() {
       console.log(chalk.red("Kein Inhalt in der Datei gefunden."));
       return;
     }
+    logger.separator();
     return fileContent;
   }
 }
