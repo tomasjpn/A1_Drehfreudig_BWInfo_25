@@ -1,8 +1,17 @@
 import chalk from "chalk";
 import { fileManager } from "./fileManager.js";
 import { checkDrehfreudig } from "./treeParser.js";
+import { logger } from "./logger.js";
+import { setTimeout } from "node:timers/promises";
+import { log } from "node:console";
 
 /* fileManager(); */
+logger.separator();
+await logger.title("TOMAS PHAM");
+await setTimeout(1500);
+await logger.title("A1 - Drehfreudig BWInf 25");
+
+await setTimeout(2500);
 
 const fileContent = await fileManager();
 if (!fileContent) {

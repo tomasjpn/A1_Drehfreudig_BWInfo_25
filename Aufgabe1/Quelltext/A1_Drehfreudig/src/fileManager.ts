@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import chalk from "chalk";
 import prompts from "prompts";
 import { logger } from "./logger.js";
+import { teen } from "gradient-string";
 
 async function loadTestFiles(
   folderPath: string
@@ -35,7 +36,7 @@ async function readTestFiles(filePath: string) {
       "utf-8"
     );
     console.log("... Inhalt der Testdatei erfolgreich geladen");
-    console.log("Inhalt der Testdatei:", chalk.green(fileContent));
+    console.log("Inhalt der Testdatei:", teen(fileContent));
     return fileContent.trim();
   } catch (error) {
     console.error("... Fehler beim Lesen der Testdatei:", error);
@@ -54,7 +55,8 @@ export async function fileManager() {
       )} }  zuzugreifen ...`
     );
     await fs.access(testFolderPath);
-    console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!"));
+    logger.success("... Zugriff auf den Ordner erfolgreich!");
+    /*   console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!")); */
   } catch (error) {
     console.error("... Zugriff auf den Ordner fehlgeschlagen:", error);
   }
