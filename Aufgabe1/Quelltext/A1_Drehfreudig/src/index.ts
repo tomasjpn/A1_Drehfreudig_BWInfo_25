@@ -7,10 +7,10 @@ import { setTimeout } from "node:timers/promises";
 /* fileManager(); */
 logger.separator();
 await logger.title("TOMAS PHAM");
-await setTimeout(1500);
+/* await setTimeout(1500); */
 await logger.title("A1 - Drehfreudig BWInf 25");
 
-await setTimeout(2500);
+/* await setTimeout(2500); */
 
 const fileContent = await fileManager();
 if (!fileContent) {
@@ -19,7 +19,7 @@ if (!fileContent) {
 }
 
 const result = checkDrehfreudig(fileContent);
-console.log(
+logger.info(
   `→ ${
     result
       ? chalk.green(

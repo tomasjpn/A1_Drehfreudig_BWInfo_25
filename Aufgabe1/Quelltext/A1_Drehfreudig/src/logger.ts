@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import figlet from "figlet";
 import { teen } from "gradient-string";
+import { info } from "node:console";
 
 export const logger = {
   title: async (text: string) => {
@@ -19,10 +20,18 @@ export const logger = {
     console.log(chalk.bold.underline.blue(title));
     logger.separator();
   },
-  error: (message: string) => {
-    console.error(chalk.bold.red("Error: ") + message);
+  error: (message: string, error?: unknown) => {
+    console.error(
+      chalk.bold.red("Error: ") + message + (error ? `\n${error}` : "")
+    );
   },
   success: (message: string) => {
     console.log(chalk.bold.green(message));
+  },
+  info: (message: string, files?: string[] | string) => {
+    console.log(chalk.gray(message));
+    if (files) {
+      console.log(files);
+    }
   },
 };

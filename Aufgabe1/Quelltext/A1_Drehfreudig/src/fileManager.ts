@@ -9,16 +9,16 @@ async function loadTestFiles(
 ): Promise<string[] | undefined> {
   logger.separator();
   try {
-    console.log(
+    logger.info(
       `Versuche die Dateien im Ordner: ${chalk.italic.underline.bold.cyan(
         folderPath
       )},  zu laden ...`
     );
     const files = await fs.readdir(folderPath);
-    console.log("... Dateien wurden erfolgreich geladen:", files);
+    logger.info("... Dateien wurden erfolgreich geladen:", files);
     return files;
   } catch (error) {
-    console.error("... Fehler beim Laden der Dateien:", error);
+    logger.error("... Fehler beim Laden der Dateien:", error);
     return undefined;
   }
 }
@@ -26,7 +26,7 @@ async function loadTestFiles(
 async function readTestFiles(filePath: string) {
   logger.separator();
   try {
-    console.log(
+    logger.info(
       `Versuche den Inhalt der Testdatei: ${chalk.italic.underline.bold.cyan(
         filePath
       )}, zu lesen ...`
@@ -35,11 +35,11 @@ async function readTestFiles(filePath: string) {
       `../A1_Drehfreudig_Test_Daten/${filePath}`,
       "utf-8"
     );
-    console.log("... Inhalt der Testdatei erfolgreich geladen");
-    console.log("Inhalt der Testdatei:", teen(fileContent));
+    logger.success("... Inhalt der Testdatei erfolgreich geladen");
+    logger.info("Inhalt der Testdatei:", teen(fileContent));
     return fileContent.trim();
   } catch (error) {
-    console.error("... Fehler beim Lesen der Testdatei:", error);
+    logger.error("... Fehler beim Lesen der Testdatei:", error);
   }
 }
 
@@ -58,12 +58,12 @@ export async function fileManager() {
     logger.success("... Zugriff auf den Ordner erfolgreich!");
     /*   console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!")); */
   } catch (error) {
-    console.error("... Zugriff auf den Ordner fehlgeschlagen:", error);
+    logger.error("... Zugriff auf den Ordner fehlgeschlagen:", error);
   }
 
   const testFiles = await loadTestFiles(testFolderPath);
   if (testFiles && testFiles.length === 0) {
-    console.log(chalk.red("... Ordner beinhaltet keine Testdateien."));
+    logger.error("... Ordner beinhaltet keine Testdateien.");
     return;
   }
 
@@ -82,27 +82,27 @@ export async function fileManager() {
       })),
       initial: 0,
     });
-    console.log(
+    logger.info(
       "Folgende Testdatei wurde ausgewählt:",
       chalk.italic.underline.bold.cyan(userResponse.testFile)
     );
 
     if (!userResponse.testFile) {
-      console.log(
+      logger.error(
         chalk.red("Keine Testdatei ausgewählt. Vorgang abgebrochen.")
       );
       return;
     }
 
     const selectedFilePath = `${testFolderPath}/${userResponse.testFile}`;
-    console.log(
+    logger.info(
       "Dateipfad der ausgewählten Testdatei:",
       chalk.italic.underline.bold.cyan(selectedFilePath)
     );
 
     const fileContent = await readTestFiles(userResponse.testFile);
     if (!fileContent) {
-      console.log(chalk.red("Kein Inhalt in der Datei gefunden."));
+      logger.error("Kein Inhalt in der Datei gefunden.");
       return;
     }
     logger.separator();
