@@ -3,7 +3,6 @@ import { fileManager } from "./fileManager.js";
 import { checkDrehfreudig } from "./treeParser.js";
 import { logger } from "./logger.js";
 import { setTimeout } from "node:timers/promises";
-import { log } from "node:console";
 
 /* fileManager(); */
 logger.separator();
