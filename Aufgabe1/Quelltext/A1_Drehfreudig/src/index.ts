@@ -14,7 +14,9 @@ await logger.title("A1 - Drehfreudig BWInf 25");
 
 const fileContent = await fileManager();
 if (!fileContent) {
-  console.log("Kein Inhalt zum Verarbeiten gefunden.");
+  logger.info(
+    "Nachdem die Testdateien hochgeladen wurden, starte das Programm erneut."
+  );
   process.exit(1);
 }
 

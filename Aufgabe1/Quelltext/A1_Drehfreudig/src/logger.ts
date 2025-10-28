@@ -21,9 +21,7 @@ export const logger = {
     logger.separator();
   },
   error: (message: string, error?: unknown) => {
-    console.error(
-      chalk.bold.red("Error: ") + message + (error ? `\n${error}` : "")
-    );
+    console.error(chalk.bold.red(message + (error ? `\n${error}` : "")));
   },
   success: (message: string) => {
     console.log(chalk.bold.green(message));
