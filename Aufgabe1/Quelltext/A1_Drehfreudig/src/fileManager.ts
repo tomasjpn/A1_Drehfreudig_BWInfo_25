@@ -49,7 +49,7 @@ export async function fileManager() {
   const testFolderPath = "../A1_Drehfreudig_Test_Daten";
   logger.separator();
   try {
-    console.log(
+    logger.info(
       `Versuche, auf den Ordner mit den Testdateien: { ${chalk.italic.underline.bold.cyan(
         testFolderPath
       )} }  zuzugreifen ...`
