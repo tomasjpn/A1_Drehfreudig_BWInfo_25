@@ -1,3 +1,5 @@
+import { logger } from "./logger.js";
+
 type Node = {
   children: Node[];
   l?: number;
@@ -59,18 +61,18 @@ function checkPalindrome(intervalWidths: number[]): boolean {
 //--------------------------------------------------------------------------------//
 
 export function checkDrehfreudig(treeString: string): boolean {
-  console.log("Überprüfe den Baum auf Drehfreudigkeit...");
-  console.log("Parse den Baum aus der Eingabe...");
+  logger.info("Überprüfe den Baum auf Drehfreudigkeit...");
+  logger.info("Parse den Baum aus der Eingabe...");
   const [root, pos] = parseTree(treeString, 0);
   if (pos !== treeString.length) {
     throw new Error("Ungültige Eingabe: Überzählige Zeichen am Ende");
   }
 
-  console.log("... Baum erfolgreich geparst.");
-  console.log("Weise jedem Knoten Intervalle zu...");
+  logger.success("... Baum erfolgreich geparst.");
+  logger.info("Weise jedem Knoten Intervalle zu...");
 
   assignIntervals(root, 1);
-  console.log("... Intervalle erfolgreich zugewiesen.");
+  logger.success("... Intervalle erfolgreich zugewiesen.");
 
   function checkNode(currentNode: Node): boolean {
     if (currentNode.children.length === 0) return true;
@@ -82,7 +84,7 @@ export function checkDrehfreudig(treeString: string): boolean {
     return true;
   }
 
-  console.log("... Drehfreudigkeitsprüfung abgeschlossen.");
+  logger.info("... Drehfreudigkeitsprüfung abgeschlossen.");
 
   return checkNode(root);
 }
