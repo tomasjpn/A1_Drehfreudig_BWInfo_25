@@ -14,7 +14,18 @@ async function loadTestFiles(
         folderPath
       )},  zu laden ...`
     );
-    const files = await fs.readdir(folderPath);
+    const files = (await fs.readdir(folderPath)).filter(
+      (f) => f !== ".DS_Store"
+    );
+    if (!files || files.length === 0) {
+      logger.error("... Keine Dateien im Ordner gefunden.");
+      logger.error(
+        `Bitte füge Testdateien in den folgenden Ordner: ${chalk.italic.underline.bold.cyan(
+          folderPath
+        )}`
+      );
+      return;
+    }
     logger.info("... Dateien wurden erfolgreich geladen:", files);
     return files;
   } catch (error) {
@@ -62,10 +73,6 @@ export async function fileManager() {
   }
 
   const testFiles = await loadTestFiles(testFolderPath);
-  if (testFiles && testFiles.length === 0) {
-    logger.error("... Ordner beinhaltet keine Testdateien.");
-    return;
-  }
 
   if (testFiles) {
     for (const testFile of testFiles) {
