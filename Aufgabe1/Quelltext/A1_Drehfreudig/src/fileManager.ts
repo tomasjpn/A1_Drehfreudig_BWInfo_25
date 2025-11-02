@@ -115,5 +115,3 @@ export async function fileManager() {
     return fileContent;
   }
 }
-
-/* fileManager(); */

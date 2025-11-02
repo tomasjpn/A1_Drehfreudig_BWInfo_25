@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import figlet from "figlet";
 import { teen } from "gradient-string";
-import { info } from "node:console";
 
 export const logger = {
   title: async (text: string) => {
