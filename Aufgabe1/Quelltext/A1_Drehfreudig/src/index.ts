@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { fileManager } from "./fileManager.js";
 import { checkDrehfreudig } from "./treeParser.js";
 import { logger } from "./logger.js";

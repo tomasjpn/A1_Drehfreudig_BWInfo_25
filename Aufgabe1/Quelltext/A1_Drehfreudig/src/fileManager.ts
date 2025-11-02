@@ -67,7 +67,6 @@ export async function fileManager() {
     );
     await fs.access(testFolderPath);
     logger.success("... Zugriff auf den Ordner erfolgreich!");
-    /*   console.log(chalk.green("... Zugriff auf den Ordner erfolgreich!")); */
   } catch (error) {
     logger.error("... Zugriff auf den Ordner fehlgeschlagen:", error);
   }
@@ -76,7 +75,7 @@ export async function fileManager() {
 
   if (testFiles) {
     for (const testFile of testFiles) {
-      const fileContent = await readTestFiles(testFile);
+      await readTestFiles(testFile);
     }
     logger.separator();
     const userResponse = await prompts({
