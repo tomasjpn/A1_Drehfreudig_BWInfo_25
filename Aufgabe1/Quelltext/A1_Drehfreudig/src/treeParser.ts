@@ -60,7 +60,10 @@ function checkPalindrome(intervalWidths: number[]): boolean {
 
 //--------------------------------------------------------------------------------//
 
-export function checkDrehfreudig(treeString: string): boolean {
+export function checkDrehfreudig(treeString: string): {
+  resultMessage: string;
+  isDrehfreudig: boolean;
+} {
   logger.info("Überprüfe den Baum auf Drehfreudigkeit...");
   logger.info("Parse den Baum aus der Eingabe...");
   const [root, pos] = parseTree(treeString, 0);
@@ -86,5 +89,14 @@ export function checkDrehfreudig(treeString: string): boolean {
 
   logger.info("... Drehfreudigkeitsprüfung abgeschlossen.");
 
-  return checkNode(root);
+  const isDrehfreudig = checkNode(root);
+  let resultMessage = `Der ausgewählte Baum: ${treeString} ist `;
+
+  if (isDrehfreudig) {
+    resultMessage += "→ drehfreudig";
+  } else {
+    resultMessage += "→ nicht drehfreudig";
+  }
+
+  return { resultMessage, isDrehfreudig };
 }
